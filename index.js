@@ -4,12 +4,18 @@ const assert = require('assert'),
 	  { dirname, join } = require('path');
 // If debug available require it.
 let debug; try { debug = require('debug')('hoast-changed'); } catch(error) { debug = function() {}; }
+// Dependency modules.
+const nanomatch = require('nanomatch');
 
 /**
  * Validates the module options.
  * @param {Object} options The options.
  */
 const validateOptions = function(options) {
+	if (!options) {
+		return; // Since no option is required.
+	}
+	
 	assert(typeof(options) === 'object', 'hoast-changed: options must be of type object.');
 	if (options.file) {
 		assert(typeof(options.file) === 'string', 'hoast-changed: file must be of type string.');
@@ -73,7 +79,7 @@ module.exports = function(options) {
 	return async function(hoast, files) {
 		debug(`Running module.`);
 		
-		const path = join(hoast.options.destination, file);
+		const path = join(hoast.options.destination, options.file).concat('.json');
 		// Read changed list from storage.
 		// This is done each batch as it is otherwise retained in memory even across multiple process calls.
 		let list;
@@ -91,16 +97,16 @@ module.exports = function(options) {
 			debug(`Filtering file '${file.path}'.`);
 			
 			// If it matches any of the patterns always process.
-			if (nanomatch.any(file.path, options.patterns)) {
+			if (options.patterns && nanomatch.any(file.path, options.patterns)) {
 				debug(`File path matched patterns.`);
 				return true;
 			}
 			// If it is in the list and not changed since the last time do not process.
 			if (list[file.path] && file.stats.ctimeMs <= list[file.path]) {
-				debug(`File no changed since last process.`);
+				debug(`File no change since last process.`);
 				return false;
 			}
-			debug(`File never processed before..`);
+			debug(`File never processed before.`);
 			// Update changed time and process.
 			list[file.path] = file.stats.ctimeMs;
 			return true;
