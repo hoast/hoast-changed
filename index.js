@@ -90,13 +90,13 @@ module.exports = function(options) {
 				return true;
 			}
 			// If it is in the list and not changed since the last time do not process.
-			if (this.list[file.path] && file.stats.ctimeMs <= this.list[file.path]) {
-				debug(`File no change since last process.`);
+			if (this.list[file.path] && this.list[file.path] >= file.stats.mtimeMs) {
+				debug(`File not changed since last process.`);
 				return false;
 			}
-			debug(`File never processed before.`);
+			debug(`File changed or not processed before.`);
 			// Update changed time and process.
-			this.list[file.path] = file.stats.ctimeMs;
+			this.list[file.path] = file.stats.mtimeMs;
 			return true;
 		}, method);
 		debug(`Finished filtering files.`);
@@ -131,8 +131,8 @@ module.exports = function(options) {
 		}
 		debug(`Wrote changed list to '${this.path}'.`);
 		
-		this.path = null;
-		this.list = null;
+		this.path = undefined;
+		this.list = undefined;
 	};
 	
 	return method;
