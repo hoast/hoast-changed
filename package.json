@@ -1,7 +1,7 @@
 {
   "author": "Ron Dekker",
   "name": "hoast-changed",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hoast module used filter out files which have not been changed since the last build.",
   "license": "ISC",
   "keywords": [
@@ -21,7 +21,7 @@
     "url": "https://github.com/hoast/hoast-changed/issues"
   },
   "peerDependencies": {
-    "hoast": "^0.0.6"
+    "hoast": "^0.0.7"
   },
   "dependencies": {
     "nanomatch": "^1.2.13"

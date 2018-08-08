@@ -76,22 +76,10 @@ module.exports = function(options) {
 		file: 'hoast-changed'
 	}, options);
 	
-	return async function(hoast, files) {
+	// Main module method.
+	const method = function(hoast, files) {
 		debug(`Running module.`);
 		
-		const path = join(hoast.options.destination, options.file).concat('.json');
-		// Read changed list from storage.
-		// This is done each batch as it is otherwise retained in memory even across multiple process calls.
-		let list;
-		try {
-			list = await read(path);
-			debug(`Read changed list from '${path}'`);
-		} catch(error) {
-			list = {};
-			debug(`Unable to read changed list from '${path}', created new list instead.`);
-		}
-		
-		debug(`Start filtering files`);
 		// Loop through the files.
 		const filtered = files.filter(function(file) {
 			debug(`Filtering file '${file.path}'.`);
@@ -102,26 +90,50 @@ module.exports = function(options) {
 				return true;
 			}
 			// If it is in the list and not changed since the last time do not process.
-			if (list[file.path] && file.stats.ctimeMs <= list[file.path]) {
+			if (this.list[file.path] && file.stats.ctimeMs <= this.list[file.path]) {
 				debug(`File no change since last process.`);
 				return false;
 			}
 			debug(`File never processed before.`);
 			// Update changed time and process.
-			list[file.path] = file.stats.ctimeMs;
+			this.list[file.path] = file.stats.ctimeMs;
 			return true;
-		});
+		}, method);
 		debug(`Finished filtering files.`);
-		
-		// Write list to storage.
-		try {
-			await write(hoast, path, list);
-		} catch(error) {
-			throw error;
-		}
-		debug(`Wrote changed list to '${path}'.`);
 		
 		// Return filtered files.
 		return filtered;
 	};
+	
+	method.before = async function(hoast) {
+		debug(`Running module before.`);
+		
+		// Construct file path.
+		this.path = join(hoast.options.destination, options.file).concat('.json');
+		// Try to read the changed list from storage.
+		try {
+			this.list = await read(this.path);
+			debug(`Read changed list from '${this.path}'`);
+		} catch (error) {
+			this.list = {};
+			debug(`Unable to read changed list from '${this.path}', created new list instead.`);
+		}
+	};
+	
+	method.after = async function(hoast) {
+		debug(`Running module after.`);
+		
+		// Write list to storage.
+		try {
+			await write(hoast, this.path, this.list);
+		} catch(error) {
+			throw error;
+		}
+		debug(`Wrote changed list to '${this.path}'.`);
+		
+		this.path = null;
+		this.list = null;
+	};
+	
+	return method;
 };

@@ -29,7 +29,7 @@ $ npm install hoast-changed
 {
   "modules": {
 	"hoast-changed": {
-      "patterns": "**/index.md"
+    "patterns": "**/index.md"
 	},
 	"read": {}
   }
