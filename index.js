@@ -1,11 +1,11 @@
 // Node modules.
-const assert = require('assert'),
-	  { readFile, writeFile } = require('fs'),
-	  { dirname, join } = require('path');
+const assert = require(`assert`),
+	{ readFile, writeFile } = require(`fs`),
+	{ dirname, join } = require(`path`);
 // If debug available require it.
-let debug; try { debug = require('debug')('hoast-changed'); } catch(error) { debug = function() {}; }
+let debug; try { debug = require(`debug`)(`hoast-changed`); } catch(error) { debug = function() {}; }
 // Dependency modules.
-const nanomatch = require('nanomatch');
+const nanomatch = require(`nanomatch`);
 
 /**
  * Validates the module options.
@@ -16,12 +16,12 @@ const validateOptions = function(options) {
 		return; // Since no option is required.
 	}
 	
-	assert(typeof(options) === 'object', 'hoast-changed: options must be of type object.');
+	assert(typeof(options) === `object`, `hoast-changed: options must be of type object.`);
 	if (options.file) {
-		assert(typeof(options.file) === 'string', 'hoast-changed: file must be of type string.');
+		assert(typeof(options.file) === `string`, `hoast-changed: file must be of type string.`);
 	}
 	if (options.patterns) {
-		assert(typeof(options.patterns) === 'string' || (Array.isArray(options.patterns) && options.patterns.length > 0 && typeof(options.patterns[0] === 'string')), 'hoast-changed: patterns must be of type string or an array of strings.');
+		assert(typeof(options.patterns) === `string` || (Array.isArray(options.patterns) && options.patterns.length > 0 && typeof(options.patterns[0] === `string`)), `hoast-changed: patterns must be of type string or an array of strings.`);
 	}
 };
 
@@ -31,7 +31,7 @@ const validateOptions = function(options) {
  */
 const read = function(path) {
 	return new Promise(function(resolve, reject) {
-		readFile(path, 'utf8', function(error, data) {
+		readFile(path, `utf8`, function(error, data) {
 			if (error) {
 				return reject(error);
 			}
@@ -50,12 +50,12 @@ const write = function(hoast, path, content) {
 	return new Promise(function(resolve, reject) {
 		hoast.helper.createDirectory(dirname(path))
 			.then(function() {
-				writeFile(path, JSON.stringify(content), 'utf8', function(error) {
+				writeFile(path, JSON.stringify(content), `utf8`, function(error) {
 					if (error) {
 						return reject(error);
 					}
 					resolve();
-				})
+				});
 			})
 			.catch(function(error) {
 				reject(error);
@@ -73,7 +73,7 @@ module.exports = function(options) {
 	validateOptions(options);
 	debug(`Validated options.`);
 	options = Object.assign({
-		file: 'hoast-changed'
+		file: `hoast-changed`
 	}, options);
 	
 	// Main module method.
@@ -109,7 +109,7 @@ module.exports = function(options) {
 		debug(`Running module before.`);
 		
 		// Construct file path.
-		this.path = join(hoast.options.destination, options.file).concat('.json');
+		this.path = join(hoast.options.destination, options.file).concat(`.json`);
 		// Try to read the changed list from storage.
 		try {
 			this.list = await read(this.path);

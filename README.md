@@ -41,13 +41,13 @@ $ npm install hoast-changed
 **Script**
 
 ```javascript
-const Hoast = require('hoast');
+const Hoast = require(`hoast`);
 const read = Hoast.read,
-      changed = require('hoast-changed');
+      changed = require(`hoast-changed`);
 
 Hoast(__dirname)
   .use(changed({
-    patterns: '**/index.md'
+    patterns: `**/index.md`
   }))
   .use(read())
   .process();
