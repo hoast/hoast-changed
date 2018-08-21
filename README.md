@@ -1,3 +1,21 @@
+<div align="center">
+  <a title="Version master branch" href="https://github.com/hoast/hoast-changed#readme" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/github/package-json/v/hoast/hoast-changed.svg?label=master&style=flat-square"/>
+  </a>
+  <a title="Version npm package" href="https://npmjs.com/package/hoast-changed" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/npm/v/hoast-changed.svg?label=npm&style=flat-square"/>
+  </a>
+  <a title="License agreement" href="https://github.com/hoast/hoast-changed/blob/master/LICENSE" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/github/license/hoast/hoast-changed.svg?style=flat-square"/>
+  </a>
+  <a title="Travis-ci build statis" href="https://travis-ci.org/hoast/hoast-changed" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/travis-ci/hoast/hoast-changed.svg?branch=master&style=flat-square"/>
+  </a>
+  <a title="Open issues on GitHub" href="https://github.com/hoast/hoast-changed/issues" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/github/issues/hoast/hoast-changed.svg?style=flat-square"/>
+  </a>
+</div>
+
 # hoast-changed
 
 Filter out files which have not been changed since the last build.
