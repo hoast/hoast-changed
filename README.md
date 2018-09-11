@@ -22,7 +22,7 @@ $ npm install hoast-changed
 
 ### Parameters
 
-* `file` **{{String}}**: The file path where the update times are stored.
+* `file` **{String}**: The file path where the update times are stored.
 	* Default: `hoast-changed`
 * `patterns` **{Array|strings}**: A string or an array of strings which gets used to match files using glob patterns. If the file path matches one of the patterns it will never be filtered out regardless of the last update time. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns.
 	* Required: `no`
