@@ -55,11 +55,6 @@ const validateOptions = function(options) {
  * @param {Boolean} all Whether all patterns need to match.
  */
 const isMatch = function(value, expressions, all) {
-	// If no expressions return early as valid.
-	if (!expressions) {
-		return true;
-	}
-	
 	const result = match(value, expressions);
 	
 	// If results is a boolean check if it is true.
@@ -135,7 +130,7 @@ module.exports = function(options) {
 		const filtered = files.filter(function(file) {
 			debug(`Filtering file '${file.path}'.`);
 			
-			if (isMatch(file.path, this.expressions, options.patternOptions.all)) {
+			if (this.expressions && isMatch(file.path, this.expressions, options.patternOptions.all)) {
 				debug(`File path valid for skipping.`);
 				return true;
 			}

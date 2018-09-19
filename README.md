@@ -1,10 +1,15 @@
-[![Version npm package](https://img.shields.io/npm/v/hoast-changed.svg?label=npm&style=flat-square)](https://npmjs.com/package/hoast-changed)
-[![Version npm package @next](https://img.shields.io/npm/v/hoast-changed/next.svg?label=npm/next&style=flat-square)](https://npmjs.com/package/hoast-changed/v/next)
-[![Version GitHub master branch](https://img.shields.io/github/package-json/v/hoast/hoast-changed.svg?label=github&style=flat-square)](https://github.com/hoast/hoast-changed#readme)
-[![Version GitHub develop branch](https://img.shields.io/github/package-json/v/hoast/hoast-changed/develop.svg?label=github/develop&style=flat-square)](https://github.com/hoast/hoast-changed/tree/develop#readme)
-[![License agreement](https://img.shields.io/github/license/hoast/hoast-changed.svg?style=flat-square)](https://github.com/hoast/hoast-changed/blob/master/LICENSE)
-[![Travis-ci build status](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?label=travis&branch=master&style=flat-square)](https://travis-ci.org/hoast/hoast-changed)
-[![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-changed.svg?style=flat-square)](https://github.com/hoast/hoast-changed/issues)
+<div align="center">
+  
+  [![npm package @latest](https://img.shields.io/npm/v/hoast-changed.svg?label=npm@latest&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-changed)
+  [![npm package @next](https://img.shields.io/npm/v/hoast-changed/next.svg?label=npm@next&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-changed/v/next)
+  
+  [![Travis-ci master branch](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?label=travis/master&branch=master&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-changed)
+  [![Travis-ci develop branch](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?label=travis/develop&branch=develop&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-changed)
+  
+  [![License agreement](https://img.shields.io/github/license/hoast/hoast-changed.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-changed/blob/master/LICENSE)
+  [![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-changed.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-changed/issues)
+  
+</div>
 
 # hoast-changed
 
@@ -27,7 +32,7 @@ $ npm install hoast-changed
 * `file`: The file path where the update times are stored.
   * Type: `String`
   * Default: `hoast-changed`
-* `patterns`: Glob patterns to match file paths with. If the engine function is set it will only give the function any files matching the pattern.
+* `patterns`: Glob patterns to match file paths with. If the engine function is set the files matching to the patterns will be skipped and not processed by the engine function.
   * Type: `String` or `Array of strings`
 	* Required: `no`
 * `patternOptions`: Options for the glob pattern matching. See [planckmatch options](https://github.com/redkenrok/node-planckmatch#options) for more details on the pattern options.
