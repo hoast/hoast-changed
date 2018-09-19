@@ -1,7 +1,8 @@
-[![Version master branch](https://img.shields.io/github/package-json/v/hoast/hoast-changed.svg?label=master&style=flat-square)](https://github.com/hoast/hoast-changed#readme)
 [![Version npm package](https://img.shields.io/npm/v/hoast-changed.svg?label=npm&style=flat-square)](https://npmjs.com/package/hoast-changed)
+[![Version GitHub master branch](https://img.shields.io/github/package-json/v/hoast/hoast-changed.svg?label=github&style=flat-square)](https://github.com/hoast/hoast-changed#readme)
+[![Version GitHub develop branch](https://img.shields.io/github/package-json/v/hoast/hoast-changed/develop.svg?label=github/develop&style=flat-square)](https://github.com/hoast/hoast-changed/tree/develop#readme)
 [![License agreement](https://img.shields.io/github/license/hoast/hoast-changed.svg?style=flat-square)](https://github.com/hoast/hoast-changed/blob/master/LICENSE)
-[![Travis-ci build status](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?branch=master&style=flat-square)](https://travis-ci.org/hoast/hoast-changed)
+[![Travis-ci build status](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?label=travis&branch=master&style=flat-square)](https://travis-ci.org/hoast/hoast-changed)
 [![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-changed.svg?style=flat-square)](https://github.com/hoast/hoast-changed/issues)
 
 # hoast-changed
@@ -22,10 +23,18 @@ $ npm install hoast-changed
 
 ### Parameters
 
-* `file` **{String}**: The file path where the update times are stored.
-	* Default: `hoast-changed`
-* `patterns` **{Array|strings}**: A string or an array of strings which gets used to match files using glob patterns. If the file path matches one of the patterns it will never be filtered out regardless of the last update time. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns.
+* `file`: The file path where the update times are stored.
+  * Type: `String`
+  * Default: `hoast-changed`
+* `patterns`: Glob patterns to match file paths with. If the engine function is set it will only give the function any files matching the pattern.
+  * Type: `String` or `Array of strings`
 	* Required: `no`
+* `patternOptions`: Options for the glob pattern matching. See [planckmatch options](https://github.com/redkenrok/node-planckmatch#options) for more details on the pattern options.
+  * Type: `Object`
+  * Default: `{}`
+* `patternOptions.all`: This options is added to `patternOptions`, and determines whether all patterns need to match instead of only one.
+  * Type: `Boolean`
+  * Default: `false`
 
 ### Example
 
@@ -34,10 +43,13 @@ $ npm install hoast-changed
 ```json
 {
   "modules": {
-	"hoast-changed": {
-    "patterns": "**/index.md"
-	},
-	"read": {}
+    "hoast-changed": {
+      "patterns": "**/index.md",
+      "patternOptions": {
+        "globstar": true
+      }
+    },
+    "read": {}
   }
 }
 ```
@@ -53,7 +65,10 @@ const read = Hoast.read,
 
 Hoast(__dirname)
   .use(changed({
-    patterns: `**/index.md`
+    patterns: `**/index.md`,
+    patternOptions: {
+      globstar: true
+    }
   }))
   .use(read())
   .process();

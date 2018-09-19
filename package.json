@@ -1,7 +1,10 @@
 {
-  "author": "Ron Dekker",
+  "author": {
+    "name": "Ron Dekker",
+    "url": "https://rondekker.nl"
+  },
   "name": "hoast-changed",
-  "version": "0.1.0",
+  "version": "1.0.0-beta.0",
   "description": "Hoast module used filter out files which have not been changed since the last build.",
   "license": "ISC",
   "keywords": [
@@ -19,13 +22,16 @@
   "engines": {
     "node": ">=7.8.0"
   },
-  "main": "index.js",
+  "main": "library/index.js",
+  "files": [
+    "library/"
+  ],
   "scripts": {
-    "pretest": "eslint index.js test.js",
-    "test": "ava test.js --verbose"
+    "pretest": "eslint library/**/*.js test/**/*.js",
+    "test": "ava test/**/*.js --verbose"
   },
   "dependencies": {
-    "nanomatch": "^1.2.13"
+    "planckmatch": "^0.0.3"
   },
   "devDependencies": {
     "ava": "^0.25.0",

@@ -1,16 +1,16 @@
 // Node modules.
-const { readFileSync, unlink, writeFileSync } = require(`fs`),
-	{ join } = require(`path`);
-// Dependecy modules.
+const fs = require(`fs`),
+	path = require(`path`);
+// Dependency modules.
 const test = require(`ava`);
 // Custom module.
-const Changed = require(`.`);
+const Changed = require(`../library`);
 
 test(`changed`, async function(t) {
 	// Set options.
 	const options = {
-		file: `TEST_changed`,
-		patterns: `**/a.md`
+		file: `test-changed`,
+		patterns: `a.md`
 	};
 	
 	// Create dummy changed file data.
@@ -21,7 +21,7 @@ test(`changed`, async function(t) {
 		'd.md': 3
 	};
 	// Write changed file to storage.
-	writeFileSync(options.file.concat(`.json`), JSON.stringify(list), `utf8`);
+	fs.writeFileSync(options.file.concat(`.json`), JSON.stringify(list), `utf8`);
 	
 	// Create dummy hoast data.
 	const hoast = {
@@ -29,7 +29,7 @@ test(`changed`, async function(t) {
 			createDirectory: async function() {}
 		},
 		options: {
-			destination: `.`
+			destination: ``
 		}
 	};
 	
@@ -90,7 +90,7 @@ test(`changed`, async function(t) {
 	
 	await changed.after(hoast);
 	// Read list from storage.
-	const listSaved = JSON.parse(readFileSync(join(__dirname, options.file.concat(`.json`)), `utf8`));
+	const listSaved = JSON.parse(fs.readFileSync(path.join(__dirname, `..`, options.file.concat(`.json`)), `utf8`));
 	// Expected outcome.
 	const listOutcome = {
 		'a.txt': 0,
@@ -103,9 +103,12 @@ test(`changed`, async function(t) {
 	t.deepEqual(listSaved, listOutcome);
 	
 	// Remove changed file from storage.
-	return unlink(options.file.concat(`.json`), function(error) {
-		if (error) {
-			throw error;
-		}
+	await new Promise(function(resolve, reject) {
+		fs.unlink(options.file.concat(`.json`), function(error) {
+			if (error) {
+				reject(error);
+			}
+			resolve();
+		});
 	});
 });
