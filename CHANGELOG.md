@@ -1,7 +1,7 @@
 # Changelog
 
-## 1.0.0-beta.0 (2018-09-19)
-For hoast `v1.0.0-beta.0`.
+## 1.0.0-beta.2 (2018-09-20)
+For hoast `v1.0.0-beta.2`.
 ### Changed
 - Restructured project files.
 - Switched from using `nanomatch` to [`planckmatch`](https://github.com/redkenrok/node-planckmatch#readme) for filtering file paths.

@@ -130,9 +130,10 @@ module.exports = function(options) {
 		const filtered = files.filter(function(file) {
 			debug(`Filtering file '${file.path}'.`);
 			
-			if (this.expressions && isMatch(file.path, this.expressions, options.patternOptions.all)) {
+			// If it does not match
+			if (this.expressions && !isMatch(file.path, this.expressions, options.patternOptions.all)) {
 				debug(`File path valid for skipping.`);
-				return true;
+				return false;
 			}
 			
 			// If it is in the list and not changed since the last time do not process.

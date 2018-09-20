@@ -10,12 +10,12 @@ test(`changed`, async function(t) {
 	// Set options.
 	const options = {
 		file: `test-changed`,
-		patterns: `a.md`
+		patterns: `*.md`
 	};
 	
 	// Create dummy changed file data.
 	const list = {
-		'a.txt': 0,
+		'a.txt': 1,
 		'b.md': 1,
 		'c.md': 2,
 		'd.md': 3
@@ -43,6 +43,11 @@ test(`changed`, async function(t) {
 		path: `b.md`,
 		stats: {
 			mtimeMs: 2
+		}
+	}, {
+		path: `b.txt`,
+		stats: {
+			mtimeMs: 3
 		}
 	}, {
 		path: `c.md`,
@@ -93,7 +98,8 @@ test(`changed`, async function(t) {
 	const listSaved = JSON.parse(fs.readFileSync(path.join(__dirname, `..`, options.file.concat(`.json`)), `utf8`));
 	// Expected outcome.
 	const listOutcome = {
-		'a.txt': 0,
+		'a.md': 0,
+		'a.txt': 1,
 		'b.md': 2,
 		'c.md': 2,
 		'd.md': 3,
