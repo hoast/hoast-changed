@@ -131,9 +131,9 @@ module.exports = function(options) {
 			debug(`Filtering file '${file.path}'.`);
 			
 			// If it does not match
-			if (this.expressions && !isMatch(file.path, this.expressions, options.patternOptions.all)) {
+			if (this.expressions && isMatch(file.path, this.expressions, options.patternOptions.all)) {
 				debug(`File path valid for skipping.`);
-				return false;
+				return true;
 			}
 			
 			// If it is in the list and not changed since the last time do not process.

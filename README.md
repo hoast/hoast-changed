@@ -32,7 +32,7 @@ $ npm install hoast-changed
 * `file`: The file path where the update times are stored.
   * Type: `String`
   * Default: `hoast-changed`
-* `patterns`: Glob patterns to match file paths with. If the file path does not match the patterns it will not be compared to or written to the changed file.
+* `patterns`: Glob patterns to match file paths with. If the file path matches the patterns it will be skipped and continue to be processed.
   * Type: `String` or `Array of strings`
   * Required: `no`
 * `patternOptions`: Options for the glob pattern matching. See [planckmatch options](https://github.com/redkenrok/node-planckmatch#options) for more details on the pattern options.

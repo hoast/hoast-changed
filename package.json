@@ -4,7 +4,7 @@
     "url": "https://rondekker.nl"
   },
   "name": "hoast-changed",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Hoast module used filter out files which have not been changed since the last build.",
   "license": "ISC",
   "keywords": [
