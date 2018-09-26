@@ -50,10 +50,7 @@ $ npm install hoast-changed
 {
   "modules": {
     "hoast-changed": {
-      "patterns": "**/index.md",
-      "patternOptions": {
-        "globstar": true
-      }
+      "patterns": "*/index.md"
     },
     "read": {}
   }
@@ -71,10 +68,7 @@ const read = Hoast.read,
 
 Hoast(__dirname)
   .use(changed({
-    patterns: `**/index.md`,
-    patternOptions: {
-      globstar: true
-    }
+    patterns: `*/index.md`
   }))
   .use(read())
   .process();
