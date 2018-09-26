@@ -4,7 +4,7 @@
     "url": "https://rondekker.nl"
   },
   "name": "hoast-changed",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "Hoast module used filter out files which have not been changed since the last build.",
   "license": "ISC",
   "keywords": [
@@ -32,7 +32,7 @@
     "test": "nyc --reporter=text ava test/**.js --verbose"
   },
   "dependencies": {
-    "planckmatch": "^0.1.0-alpha.0"
+    "planckmatch": "^0.1.0-alpha.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",
