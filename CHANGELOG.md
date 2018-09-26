@@ -1,7 +1,9 @@
 # Changelog
 
-## 1.0.0-beta.2 (2018-09-20)
-For hoast `v1.0.0-beta.2`.
+## 1.0.0 (Unreleased)
+For hoast `v1.0.0`.
+### Added
+- CodeCov coverage report added to CI workflow.
 ### Changed
 - Restructured project files.
 - Switched from using `nanomatch` to [`planckmatch`](https://github.com/redkenrok/node-planckmatch#readme) for filtering file paths.

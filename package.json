@@ -4,7 +4,7 @@
     "url": "https://rondekker.nl"
   },
   "name": "hoast-changed",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "Hoast module used filter out files which have not been changed since the last build.",
   "license": "ISC",
   "keywords": [
@@ -27,15 +27,18 @@
     "library/"
   ],
   "scripts": {
-    "pretest": "eslint library/**/*.js test/**/*.js",
-    "test": "ava test/**/*.js --verbose"
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "pretest": "eslint library/**.js test/**.js",
+    "test": "nyc --reporter=text ava test/**.js --verbose"
   },
   "dependencies": {
-    "planckmatch": "^0.0.3"
+    "planckmatch": "^0.1.0-alpha.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
+    "codecov": "^3.1.0",
     "debug": "^3.1.0",
-    "eslint": "^5.3.0"
+    "eslint": "^5.3.0",
+    "nyc": "^13.0.1"
   }
 }

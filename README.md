@@ -3,8 +3,8 @@
   [![npm package @latest](https://img.shields.io/npm/v/hoast-changed.svg?label=npm@latest&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-changed)
   [![npm package @next](https://img.shields.io/npm/v/hoast-changed/next.svg?label=npm@next&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-changed/v/next)
   
-  [![Travis-ci master branch](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?label=travis/master&branch=master&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-changed)
-  [![Travis-ci develop branch](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?label=travis/develop&branch=develop&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-changed)
+  [![Travis-ci status](https://img.shields.io/travis-ci/hoast/hoast-changed.svg?branch=master&label=test%20status&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-changed)
+  [![CodeCov coverage](https://img.shields.io/codecov/c/github/hoast/hoast-changed/master.svg?label=test%20coverage&style=flat-square&maxAge=3600)](https://codecov.io/gh/hoast/hoast-changed)
   
   [![License agreement](https://img.shields.io/github/license/hoast/hoast-changed.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-changed/blob/master/LICENSE)
   [![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-changed.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-changed/issues)
