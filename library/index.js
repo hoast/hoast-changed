@@ -57,17 +57,14 @@ const validateOptions = function(options) {
 const isMatch = function(value, expressions, all) {
 	const result = match(value, expressions);
 	
-	// If results is a boolean check if it is true.
-	if (typeof(result) === `boolean` && result) {
-		return true;
-	}
-	// If results is an array check whether everything needs to be true or any will be enough.
-	if (Array.isArray(result) && (all ? !result.includes(false) : result.includes(true))) {
-		return true;
+	// If results is an array.
+	if (Array.isArray(result)) {
+		// Check whether all or just any will result in a match, and return the outcome.
+		return all ? !result.includes(false) : result.includes(true);
 	}
 	
-	// Otherwise it is no match.
-	return false;
+	// Otherwise result is a boolean and can be returned directly.
+	return result;
 };
 
 /**
