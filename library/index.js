@@ -150,13 +150,14 @@ module.exports = function(options) {
 		return filtered;
 	};
 	
+	// Parse glob patterns into regular expressions.
+	if (options.patterns) {
+		mod.expressions = parse(options.patterns, options.patternOptions, true);
+		debug(`Patterns parsed into expressions: ${mod.expressions}.`);
+	}
+	
 	mod.before = async function(hoast) {
 		debug(`Running module before.`);
-		
-		// Parse glob patterns into regular expressions.
-		if (options.patterns) {
-			this.expressions = parse(options.patterns, options.patternOptions, true);
-		}
 		
 		// Construct file path.
 		this.filePath = path.join(hoast.options.destination, options.file).concat(`.json`);

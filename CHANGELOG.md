@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (unreleased)
+For hoast `v1.0.0`.
+### Changed
+- Removed the pattern parsing from the module's before function.
+
 ## 1.0.1 (2018-09-28)
 For hoast `v1.0.0`.
 ### Changed
