@@ -2,7 +2,8 @@
 const fs = require(`fs`),
 	path = require(`path`);
 // Dependency modules.
-const test = require(`ava`);
+const Hoast = require(`hoast`),
+	test = require(`ava`);
 // Custom module.
 const Changed = require(`../library`);
 
@@ -24,14 +25,9 @@ test(`changed`, async function(t) {
 	fs.writeFileSync(options.file.concat(`.json`), JSON.stringify(list), `utf8`);
 	
 	// Create dummy hoast data.
-	const hoast = {
-		helper: {
-			createDirectory: async function() {}
-		},
-		options: {
-			destination: ``
-		}
-	};
+	const hoast = Hoast(__dirname, {
+		destination: ``
+	});
 	
 	// Create dummy files data.
 	let files = [{

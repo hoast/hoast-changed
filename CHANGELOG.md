@@ -1,9 +1,9 @@
 # Changelog
 
-## 1.0.2 (unreleased)
-For hoast `v1.0.0`.
+## 1.1.0
+For hoast `v1.1.0`.
 ### Changed
-- Removed the pattern parsing from the module's before function.
+- Reduced module complexity by using new `hoast.helper.parse` and `hoast.helper.match` helper functions.
 
 ## 1.0.1 (2018-09-28)
 For hoast `v1.0.0`.
