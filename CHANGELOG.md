@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0
+## 1.1.0 (2018-10-17)
 For hoast `v1.1.0`.
 ### Changed
 - Reduced module complexity by using new `hoast.helper.parse` and `hoast.helper.match` helper functions.
