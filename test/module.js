@@ -7,28 +7,63 @@ const Hoast = require(`hoast`),
 // Custom module.
 const Changed = require(`../library`);
 
-test(`changed`, async function(t) {
-	// Set options.
-	const options = {
-		file: `test-changed`,
-		patterns: `a.md`
-	};
+// Module options.
+const options = {
+	file: `test-changed`,
+	patterns: `a.md`
+};
+// Dummy changed file data.
+const list = {
+	'a.txt': 1,
+	'b.md': 1,
+	'c.md': 2,
+	'd.md': 3
+};
+
+/**
+ * Emulates a simplified Hoast process for testing purposes.
+ * @param {Object} options Hoast options.
+ * @param {Function} mod Module function.
+ * @param {Array of objects} files The files to process and return.
+ */
+const emulateHoast = async function(options, mod, files) {
+	const hoast = Hoast(__dirname, options);
 	
-	// Create dummy changed file data.
-	const list = {
-		'a.txt': 1,
-		'b.md': 1,
-		'c.md': 2,
-		'd.md': 3
-	};
+	if (mod.before) {
+		await mod.before(hoast);
+	}
+	
+	files = await mod(hoast, files);
+	
+	if (mod.after) {
+		await mod.after(hoast);
+	}
+	
+	return files;
+};
+
+test.before(`set-up`, async function(t) {
 	// Write changed file to storage.
-	fs.writeFileSync(options.file.concat(`.json`), JSON.stringify(list), `utf8`);
+	fs.writeFileSync(path.join(__dirname, options.file.concat(`.json`)), JSON.stringify(list), `utf8`);
 	
-	// Create dummy hoast data.
-	const hoast = Hoast(__dirname, {
-		destination: ``
+	t.pass();
+});
+
+test.after.always(`clean-up`, async function(t) {
+	// Remove changed file from storage.
+	await new Promise(function(resolve, reject) {
+		fs.unlink(path.join(__dirname, options.file.concat(`.json`)), function(error) {
+			if (error) {
+				reject(error);
+			}
+			resolve();
+		});
 	});
 	
+	t.pass();
+});
+
+test(`changed`, async function(t) {
 	// Create dummy files data.
 	let files = [{
 		path: `a.md`,
@@ -59,11 +94,10 @@ test(`changed`, async function(t) {
 	
 	// Test module.
 	const changed = Changed(options);
-	await changed.before(hoast);
-	// Check read changed file.
-	t.deepEqual(changed.list, list);
+	files = await emulateHoast({
+		destination: `test`
+	}, changed, files);
 	
-	files = await changed(hoast, files);
 	// Expected outcome.
 	const filesOutcome = [{
 		path: `a.md`,
@@ -84,9 +118,8 @@ test(`changed`, async function(t) {
 	// Check files array.
 	t.deepEqual(files, filesOutcome);
 	
-	await changed.after(hoast);
 	// Read list from storage.
-	const listSaved = JSON.parse(fs.readFileSync(path.join(__dirname, `..`, options.file.concat(`.json`)), `utf8`));
+	const listSaved = JSON.parse(fs.readFileSync(path.join(__dirname, options.file.concat(`.json`)), `utf8`));
 	// Expected outcome.
 	const listOutcome = {
 		'a.txt': 1,
@@ -97,14 +130,4 @@ test(`changed`, async function(t) {
 	};
 	// Check changed file in storage.
 	t.deepEqual(listSaved, listOutcome);
-	
-	// Remove changed file from storage.
-	await new Promise(function(resolve, reject) {
-		fs.unlink(options.file.concat(`.json`), function(error) {
-			if (error) {
-				reject(error);
-			}
-			resolve();
-		});
-	});
 });

@@ -21,7 +21,7 @@ const read = function(filePath) {
 
 /**
  * Writes JS object to storage.
- * @param {Object} hoast Hoast instance.
+ * @param {Object} hoast hoast instance.
  * @param {String} filePath File path.
  * @param {Object} content Object to write to storage.
  */
@@ -112,10 +112,10 @@ module.exports = function(options) {
 		// Write list to storage.
 		try {
 			await write(hoast, this.filePath, this.list);
+			debug(`Wrote changed list to '${this.filePath}'.`);
 		} catch(error) {
-			throw error;
+			debug(`Unable to write changed list to '${this.filePath}'.`);
 		}
-		debug(`Wrote changed list to '${this.filePath}'.`);
 		
 		this.filePath = undefined;
 		this.list = undefined;
