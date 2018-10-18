@@ -33,7 +33,10 @@ const emulateHoast = async function(options, mod, files) {
 		await mod.before(hoast);
 	}
 	
-	files = await mod(hoast, files);
+	const temp = await mod(hoast, files);
+	if (temp) {
+		files = temp;
+	}
 	
 	if (mod.after) {
 		await mod.after(hoast);
@@ -93,10 +96,9 @@ test(`changed`, async function(t) {
 	}];
 	
 	// Test module.
-	const changed = Changed(options);
 	files = await emulateHoast({
 		destination: `test`
-	}, changed, files);
+	}, Changed(options), files);
 	
 	// Expected outcome.
 	const filesOutcome = [{
