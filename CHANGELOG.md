@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 (2018-10-24)
+For hoast `v1.1.1`
+### Changed
+- Updated to reflect changes to `hoast`'s helpers.
+
 ## 1.1.0 (2018-10-17)
 For hoast `v1.1.0`.
 ### Changed

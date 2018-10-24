@@ -27,7 +27,7 @@ const read = function(filePath) {
  */
 const write = function(hoast, filePath, content) {
 	return new Promise(function(resolve, reject) {
-		hoast.helper.createDirectory(path.dirname(filePath))
+		hoast.helpers.createDirectory(path.dirname(filePath))
 			.then(function() {
 				fs.writeFile(filePath, JSON.stringify(content), `utf8`, function(error) {
 					if (error) {
@@ -63,7 +63,7 @@ module.exports = function(options) {
 			debug(`Filtering file '${file.path}'.`);
 			
 			// If it does not match
-			if (this.expressions && hoast.helper.match(file.path, this.expressions, options.patternOptions.all)) {
+			if (this.expressions && hoast.helpers.matchExpressions(file.path, this.expressions, options.patternOptions.all)) {
 				debug(`File path valid for skipping.`);
 				return true;
 			}
@@ -90,7 +90,7 @@ module.exports = function(options) {
 		
 		// Parse glob patterns into regular expressions.
 		if (options.patterns) {
-			this.expressions = hoast.helper.parse(options.patterns, options.patternOptions, true);
+			this.expressions = hoast.helpers.parsePatterns(options.patterns, options.patternOptions, true);
 			debug(`Patterns parsed into expressions: ${this.expressions}.`);
 		}
 		
