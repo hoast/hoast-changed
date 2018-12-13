@@ -75,7 +75,3 @@ Hoast(__dirname)
 ```
 
 > All the files will be checked for their changed time except the `index.md` files which will always be processed.
-
-## License
-
-[ISC license](https://github.com/hoast/hoast-changed/blob/master/LICENSE)
