@@ -95,7 +95,7 @@ module.exports = function(options) {
 		}
 		
 		// Construct file path.
-		this.filePath = path.join(hoast.options.destination, options.file).concat(`.json`);
+		this.filePath = path.join(hoast.directory, hoast.options.destination, options.file).concat(`.json`);
 		// Try to read the changed list from storage.
 		try {
 			this.list = await read(this.filePath);
