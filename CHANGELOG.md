@@ -1,7 +1,10 @@
 # Changelog
 
+## 1.1.3 (2019-03-13)
+### Changed
++ Updated dependencies and development dependencies.
+
 ## 1.1.2 (2019-01-14)
-For hoast `v1.1.1`
 ### Fixed
 + Fixed bug whereby `hoast-changed.json` was written to the wrong directory.
 
@@ -12,12 +15,10 @@ For hoast `v1.1.1`
 + Updated to reflect changes to `hoast`'s helpers.
 
 ## 1.1.0 (2018-10-17)
-For hoast `v1.1.0`.
 ### Changed
 + Reduced module complexity by using new `hoast.helper.parse` and `hoast.helper.match` helper functions.
 
 ## 1.0.1 (2018-09-28)
-For hoast `v1.0.0`.
 ### Changed
 + Updated `planckmatch` module from version `1.0.0` to `1.0.1`.
 
